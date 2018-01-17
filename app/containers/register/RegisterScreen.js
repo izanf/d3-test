@@ -5,8 +5,8 @@ import Cards from 'react-credit-cards';
 
 // Custom components
 import RegisterNav from './../../components/register/RegisterNav';
-import RegisterInput from './../../components/register/RegisterInput';
-import RegisterSelect from './../../components/register/RegisterSelect';
+import { RegisterInput, RegisterSelect } from './../../components/shared/Inputs';
+import { AlertIcon } from './../../components/shared/Icons';
 import {
   maskCep,
   maskCardNumber,
@@ -38,11 +38,11 @@ class RegisterScreen extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   onChange(field, value) {
     const { dropdownVisible } = this.state;
-    console.log(field, value);
 
     switch (field) {
       case 'cep':
@@ -80,6 +80,10 @@ class RegisterScreen extends Component {
     }
   }
 
+  validateForm() {
+    
+  }
+
   render() {
     const {
       navSelected,
@@ -109,6 +113,12 @@ class RegisterScreen extends Component {
           <h2>Karol com 5K_</h2>
         </header>
         <RegisterNav selected={navSelected} />
+        <section className="register-screen__error">
+          <h2><AlertIcon /> Preenchimento obrigatório</h2>
+          <h1>Falha ao processar os dados do cartão</h1>
+          <p>Verifique se as informações do seu cartão de crédito estão corretas (Nome, Número, Data de Validade, Código de Segurança).</p>
+          <p>Se o problema persistir você pode usar outro cartão de crédito ou escolher como forma de pagamento o boleto bancário. Ou então, se preferir, entre em contato com seu banco ou administradora de cartão de crédito e tente realizar a compra novamente.</p>
+        </section>
         <aside>
           <section className="register-screen__payment">
             <div className="section-title">

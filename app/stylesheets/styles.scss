@@ -1,6 +1,6 @@
 // colors
 $primary: #64a80b;
-
+$error: #b7102c;
 
 #app {
   flex: 1;
@@ -17,5 +17,3 @@ $primary: #64a80b;
 
 // Components
 @import './../components/register/RegisterNav';
-@import './../components/register/RegisterInput';
-@import './../components/register/RegisterSelect';
