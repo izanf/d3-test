@@ -9,10 +9,13 @@ $primary: #64a80b;
   align-content: center;
 }
 
-// containers
+// External stylesheets
+@import './../../node_modules/react-credit-cards/lib/styles.scss';
+
+// Containers
 @import './../containers/register/RegisterScreen';
 
-// components
+// Components
 @import './../components/register/RegisterNav';
 @import './../components/register/RegisterInput';
 @import './../components/register/RegisterSelect';

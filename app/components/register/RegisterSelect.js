@@ -28,8 +28,8 @@ const RegisterSelect = ({
       onClick={() => onChangeDropdownVisible(name)}
     >
       <span>{value}</span>
+      <div className={`overlay ${dropdownVisible && 'show'}`} onClick={() => onChangeDropdownVisible('')} />
       <ul className={dropdownVisible === name && 'show'}>
-        <div className="overlay" />
         {options.map(item => (
           <li onClick={() => {
             onChange(item);

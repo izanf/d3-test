@@ -1,4 +1,4 @@
-FROM node:9.2.0
+FROM node:6.12.3
 LABEL MAINTAINER="Victor Gama <hey@vito.io>"
 
 RUN mkdir /app

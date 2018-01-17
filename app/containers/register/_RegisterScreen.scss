@@ -45,7 +45,7 @@
 
       h1 {
         width: 100%;
-        font-size: 1.7rem;
+        font-size: 2rem;
         margin-bottom: 2rem;
         padding: 0 1rem;
       }
@@ -150,6 +150,16 @@
       }
     }
   } // end __buttons
+
+  &__card {
+    display: flex;
+    width: 100%;
+    padding: 2rem 1rem;
+
+    .rccs {
+      margin: 0;
+    }
+  }
 
   footer {
     display: flex;

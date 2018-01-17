@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// External components
+import Cards from 'react-credit-cards';
+
 // Custom components
 import RegisterNav from './../../components/register/RegisterNav';
 import RegisterInput from './../../components/register/RegisterInput';
@@ -172,7 +175,7 @@ class RegisterScreen extends Component {
                   name="state"
                   width="20%"
                   dropdownVisible={dropdownVisible}
-                  options={['SP', 'RJ', 'RN']}
+                  options={['SP', 'RJ', 'RN', 'SC', 'MG', 'RS']}
                   value={state}
                   onChange={value => this.onChange('state', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
@@ -182,7 +185,7 @@ class RegisterScreen extends Component {
                   name="city"
                   width="60%"
                   dropdownVisible={dropdownVisible}
-                  options={['Natal', 'Parnamirim', 'Mossoró']}
+                  options={['Natal', 'Parnamirim', 'Mossoró', 'Currais Novos', 'Apodi', 'Macau', 'Pipa']}
                   value={city}
                   onChange={value => this.onChange('city', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
@@ -190,6 +193,15 @@ class RegisterScreen extends Component {
               </div>
               <div className="form-section">
                 <h1>Dados do cartão</h1>
+                <div className="register-screen__card">
+                  <Cards
+                    number={cardNumber}
+                    name={cardName}
+                    expiry={`${cardMonth}/${cardYear}`}
+                    cvc={cardCVV}
+                    focused
+                  />
+                </div>
                 <RegisterInput
                   label="Número"
                   name="card-number"
@@ -238,7 +250,13 @@ class RegisterScreen extends Component {
                   name="installment"
                   width="55%"
                   dropdownVisible={dropdownVisible}
-                  options={[maskPrice(price, 1), maskPrice(price, 2), maskPrice(price, 3)]}
+                  options={[
+                    maskPrice(price, 1),
+                    maskPrice(price, 2),
+                    maskPrice(price, 3),
+                    maskPrice(price, 4),
+                    maskPrice(price, 5)
+                  ]}
                   value={installment}
                   onChange={value => this.onChange('installment', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
