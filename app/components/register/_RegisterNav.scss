@@ -1,0 +1,25 @@
+.register-nav {
+  ul {
+    display: flex;
+    padding: 0;
+
+    li {
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-align: center;
+      flex: 1;
+      color: $primary;
+      padding: 4rem 0;
+      list-style: none;
+      border-bottom: 2px solid #DDD;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        color: #FFF;
+        background: $primary;
+        border-color: $primary;
+      }
+    }
+  }
+}

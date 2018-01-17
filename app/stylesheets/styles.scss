@@ -1,0 +1,18 @@
+// colors
+$primary: #64a80b;
+
+
+#app {
+  flex: 1;
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+}
+
+// containers
+@import './../containers/register/RegisterScreen';
+
+// components
+@import './../components/register/RegisterNav';
+@import './../components/register/RegisterInput';
+@import './../components/register/RegisterSelect';

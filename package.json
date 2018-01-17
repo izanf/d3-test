@@ -1,0 +1,38 @@
+{
+  "name": "centauro",
+  "description": "Centauro Hotsite Frontend",
+  "private": true,
+  "author": "Victor Gama <hey@vito.io>",
+  "version": "0.0.1",
+  "repository": "",
+  "scripts": {
+    "start": "LOGGY_STACKS=true brunch watch --server -n",
+    "build": "brunch build --production"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-credit-cards": "^0.7.0",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "process-env-brunch": "^1.4.5",
+    "auto-reload-brunch": "^2.7.1",
+    "babel-brunch": "~6.0",
+    "babel-preset-latest": "^6",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap": "^3.3.7",
+    "brunch": "^2",
+    "clean-css-brunch": "^2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "jquery": "^3.1.1",
+    "sass-brunch": "^2.10.4",
+    "uglify-js-brunch": "^2"
+  }
+}
