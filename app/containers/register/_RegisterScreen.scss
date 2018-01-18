@@ -230,6 +230,8 @@
 
 @media (max-width: 576px) {
   header {
+    padding: 0 1rem;
+
     h1 {
       font-size: 3rem;
       margin: 0;
@@ -239,6 +241,10 @@
       font-size: 2rem;
     }
   } // end header
+
+  &__error {
+    padding: 2rem 1rem;
+  }
 
   aside {
     padding: 1rem;

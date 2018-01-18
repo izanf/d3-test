@@ -14,9 +14,11 @@ const Label = styled.label`
 
 const Box = styled.div`
   display: flex;
+  align-items: center;
   width: ${props => props.widthSize ? props.widthSize : '0'};
   min-height: 76px;
   padding: .5rem 1rem;
+  position: relative;
 
   button {
     text-decoration: underline;
@@ -93,6 +95,27 @@ const Input = styled.input`
   }
 `;
 
+const InputErrorIcon = styled.span`
+  position: absolute;
+  right: 3rem;
+  
+  &:after {
+    content: "!";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    color: #FFF;
+    background: #999;
+    border-radius: 100%;
+  }
+
+@media (max-width: 576px) {
+  margin-top: -2.3rem;
+}
+`;
+
 const inputStatus = (status) => {
   switch (status) {
     case false:
@@ -111,13 +134,13 @@ const SelectBox = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  min-height: 66px;
   padding: 1.7rem;
   border: 2px solid #CCC;
   border-color: ${props => inputStatus(props.error)};
   border-radius: 50px;
   position: relative;
   cursor: pointer;
-
 
   &:after {
     content: "";
@@ -191,6 +214,7 @@ export const RegisterInput = ({
         onChange={e => onChange(e.target.value)}
         error={error}
       />
+      {error && <InputErrorIcon />}
       {children}
     </Box>
   );

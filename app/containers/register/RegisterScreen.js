@@ -113,11 +113,11 @@ class RegisterScreen extends Component {
     let error = this.state.error;
 
     if (evenDelivery) {
-      error.cep = false;
-      error.street = false;
-      error.number = false;
-      error.state = false;
-      error.city = false;
+      error.cep = '';
+      error.street = '';
+      error.number = '';
+      error.state = '';
+      error.city = '';
     } else {
       if (cep.length !== 9) error.cep = true;
       else error.cep = false;
@@ -346,7 +346,7 @@ class RegisterScreen extends Component {
                   label="Código de segurança"
                   name="card-cvv"
                   width="50%"
-                  widthMobile="35%"
+                  widthMobile="50%"
                   value={cardCVV}
                   onChange={value => this.onChange('cardCVV', value)}
                   error={error.cardCVV}
