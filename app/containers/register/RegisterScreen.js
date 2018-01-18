@@ -189,8 +189,8 @@ class RegisterScreen extends Component {
       <div className="register-screen">
         <header>
           <h2>EXP_</h2>
-          <h1>Cadastro</h1>
           <h2>Karol com 5K_</h2>
+          <h1>Cadastro</h1>
         </header>
         <RegisterNav selected={navSelected} />
         <section className={`register-screen__error ${haveError ? '' : 'hidden'}`}>
@@ -230,6 +230,7 @@ class RegisterScreen extends Component {
                   label="CEP"
                   name="cep"
                   width="70%"
+                  widthMobile="100%"
                   placeholder="_____-___"
                   value={cep}
                   onChange={value => this.onChange('cep', value)}
@@ -260,6 +261,7 @@ class RegisterScreen extends Component {
                   label="Complemento"
                   name="complement"
                   width="80%"
+                  widthMobile="100%"
                   value={complement}
                   onChange={value => this.onChange('complement', value)}
                 />
@@ -267,6 +269,7 @@ class RegisterScreen extends Component {
                   label="UF"
                   name="state"
                   width="20%"
+                  widthMobile="40%"
                   dropdownVisible={dropdownVisible}
                   options={['SP', 'RJ', 'RN', 'SC', 'MG', 'RS']}
                   value={state}
@@ -301,6 +304,7 @@ class RegisterScreen extends Component {
                   label="Número"
                   name="card-number"
                   width="45%"
+                  widthMobile="100%"
                   placeholder="____ ____ ____ ____"
                   value={maskCardNumber(cardNumber)}
                   onChange={value => this.onChange('cardNumber', value)}
@@ -310,6 +314,7 @@ class RegisterScreen extends Component {
                   label="Nome completo"
                   name="card-name"
                   width="55%"
+                  widthMobile="100%"
                   value={cardName}
                   onChange={value => this.onChange('cardName', value)}
                   error={error.cardName}
@@ -318,6 +323,7 @@ class RegisterScreen extends Component {
                   label="Validade"
                   name="card-month"
                   width="29%"
+                  widthMobile="45%"
                   dropdownVisible={dropdownVisible}
                   options={['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']}
                   value={cardMonth}
@@ -328,6 +334,7 @@ class RegisterScreen extends Component {
                 <RegisterSelect
                   name="card-year"
                   width="21%"
+                  widthMobile="55%"
                   dropdownVisible={dropdownVisible}
                   options={['2018', '2019', '2020', '2021', '2022', '2023']}
                   value={cardYear}
@@ -339,16 +346,18 @@ class RegisterScreen extends Component {
                   label="Código de segurança"
                   name="card-cvv"
                   width="50%"
+                  widthMobile="35%"
                   value={cardCVV}
                   onChange={value => this.onChange('cardCVV', value)}
                   error={error.cardCVV}
                 />
               </div>
-              <div className="form-section">
+              <div className="form-section installment">
                 <h1>Valor e parcelamento</h1>
                 <RegisterSelect
                   name="installment"
                   width="55%"
+                  widthMobile="100%"
                   dropdownVisible={dropdownVisible}
                   options={[
                     maskPrice(price, 1),
@@ -363,10 +372,6 @@ class RegisterScreen extends Component {
                 />
               </div>
             </form>
-            <div className="register-screen__buttons">
-              <button className="btn btn-outline back">Voltar</button>
-              <button className="btn btn-primary" onClick={() => this.validateForm()}>Finalizar compra</button>
-            </div>
           </section>
           <section className="register-screen__purchase-details">
             <div className="section-title">
@@ -383,6 +388,10 @@ class RegisterScreen extends Component {
               <li>Acesso exclusivo ao conteúdo do app <strong>EXP_</strong></li>
             </ul>
           </section>
+          <div className="register-screen__buttons">
+            <button className="btn btn-outline back">Voltar</button>
+            <button className="btn btn-primary" onClick={() => this.validateForm()}>Finalizar compra</button>
+          </div>
         </aside>
         <footer>
           <h1>EXP_</h1>

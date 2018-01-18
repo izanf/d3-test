@@ -34,6 +34,17 @@ const Box = styled.div`
       outline: none;
     }
   }
+
+@media (max-width: 576px) {
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width: ${props => props.widthMobileSize && props.widthMobileSize};
+  min-height: 102px;
+
+  button {
+    margin: 0 auto;
+  }
+}
 `;
 
 const Input = styled.input`
@@ -118,6 +129,10 @@ const SelectBox = styled.div`
     border-right: 6px solid transparent;
     border-top: 8px solid #999;
   }
+
+@media (max-width: 576px) {
+  height: 66px;
+}
 `;
 
 const SelectList = styled.ul`
@@ -159,13 +174,14 @@ export const RegisterInput = ({
   label,
   name,
   width,
+  widthMobile,
   placeholder,
   value,
   onChange,
   error,
   children
 }) => (
-    <Box widthSize={width}>
+    <Box widthSize={width} widthMobileSize={widthMobile}>
       {label && (<Label htmlFor={`input-${name}`}>{label}</Label>)}
       <Input
         type="text"
@@ -183,6 +199,7 @@ export const RegisterSelect = ({
   label,
   name,
   width,
+  widthMobile,
   dropdownVisible,
   options,
   value,
@@ -190,7 +207,7 @@ export const RegisterSelect = ({
   onChangeDropdownVisible,
   error
 }) => (
-    <Box widthSize={width}>
+    <Box widthSize={width} widthMobileSize={widthMobile}>
       {label && (<Label htmlFor={`input-${name}`}>{label}</Label>)}
       <SelectBox onClick={() => onChangeDropdownVisible(name)} error={error}>
         <span>{value}</span>
