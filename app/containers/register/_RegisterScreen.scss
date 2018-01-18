@@ -78,10 +78,6 @@
         margin-bottom: 2rem;
         padding: 0 1rem;
       }
-
-      &.hidden {
-        display: none;
-      }
     }
 
     .input-group {
@@ -206,4 +202,8 @@
       color: #FFF;
     }
   } // end footer
+
+  .hidden {
+    display: none;
+  }
 }

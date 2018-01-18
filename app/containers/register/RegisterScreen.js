@@ -34,11 +34,26 @@ class RegisterScreen extends Component {
       cardMonth: '',
       cardYear: '',
       cardCVV: '',
-      installment: ''
+      cardValid: false,
+      installment: '',
+      error: {
+        cep: '',
+        street: '',
+        number: '',
+        state: '',
+        city: '',
+        cardNumber: '',
+        cardName: '',
+        cardMonth: '',
+        cardYear: '',
+        cardCVV: ''
+      },
+      haveError: false
     };
 
     this.onChange = this.onChange.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.verifyErrors = this.verifyErrors.bind(this);
   }
 
   onChange(field, value) {
@@ -61,7 +76,7 @@ class RegisterScreen extends Component {
         break;
 
       case 'cardCVV':
-        if (value.length < 4) this.setState({ cardCVV: value });
+        if (value.length < 4) this.setState({ cardCVV: maskNumber(value) });
         break;
 
       case 'dropdownVisible':
@@ -81,7 +96,70 @@ class RegisterScreen extends Component {
   }
 
   validateForm() {
-    
+    const {
+      evenDelivery,
+      cep,
+      street,
+      number,
+      state,
+      city,
+      cardNumber,
+      cardName,
+      cardMonth,
+      cardYear,
+      cardCVV,
+      cardValid
+    } = this.state;
+    let error = this.state.error;
+
+    if (evenDelivery) {
+      error.cep = false;
+      error.street = false;
+      error.number = false;
+      error.state = false;
+      error.city = false;
+    } else {
+      if (cep.length !== 9) error.cep = true;
+      else error.cep = false;
+      if (street.length < 4) error.street = true;
+      else error.street = false;
+      if (number.length < 1) error.number = true;
+      else error.number = false;
+      if (state.length === 0) error.state = true;
+      else error.state = false;
+      if (city.length === 0) error.city = true;
+      else error.city = false;
+    }
+
+    if (!cardValid) error.cardNumber = true;
+    else error.cardNumber = false;
+    if (cardName.length === 0) error.cardName = true;
+    else error.cardName = false;
+    if (cardMonth.length < 2) error.cardMonth = true;
+    else error.cardMonth = false;
+    if (cardYear.length < 4) error.cardYear = true;
+    else error.cardYear = false;
+    if (cardCVV.length < 3) error.cardCVV = true;
+    else error.cardCVV = false;
+
+    this.setState({ error });
+
+    this.verifyErrors();
+  }
+
+  verifyErrors() {
+    const { error } = this.state;
+
+    for (let key in error) {
+      if (error[key] === true) {
+        this.setState({ haveError: true });
+        break;
+      } else {
+        this.setState({ haveError: false });
+      }
+    }
+
+    this.setState({ error });
   }
 
   render() {
@@ -100,7 +178,9 @@ class RegisterScreen extends Component {
       cardMonth,
       cardYear,
       cardCVV,
-      installment
+      installment,
+      error,
+      haveError
     } = this.state;
 
     const price = 4231;
@@ -113,7 +193,7 @@ class RegisterScreen extends Component {
           <h2>Karol com 5K_</h2>
         </header>
         <RegisterNav selected={navSelected} />
-        <section className="register-screen__error">
+        <section className={`register-screen__error ${haveError ? '' : 'hidden'}`}>
           <h2><AlertIcon /> Preenchimento obrigatório</h2>
           <h1>Falha ao processar os dados do cartão</h1>
           <p>Verifique se as informações do seu cartão de crédito estão corretas (Nome, Número, Data de Validade, Código de Segurança).</p>
@@ -153,6 +233,7 @@ class RegisterScreen extends Component {
                   placeholder="_____-___"
                   value={cep}
                   onChange={value => this.onChange('cep', value)}
+                  error={error.cep}
                 >
                   <button>Não sei meu CEP</button>
                 </RegisterInput>
@@ -165,6 +246,7 @@ class RegisterScreen extends Component {
                   width="70%"
                   value={street}
                   onChange={value => this.onChange('street', value)}
+                  error={error.street}
                 />
                 <RegisterInput
                   label="Número"
@@ -172,6 +254,7 @@ class RegisterScreen extends Component {
                   width="30%"
                   value={number}
                   onChange={value => this.onChange('number', value)}
+                  error={error.number}
                 />
                 <RegisterInput
                   label="Complemento"
@@ -189,6 +272,7 @@ class RegisterScreen extends Component {
                   value={state}
                   onChange={value => this.onChange('state', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
+                  error={error.state}
                 />
                 <RegisterSelect
                   label="Cidade"
@@ -199,6 +283,7 @@ class RegisterScreen extends Component {
                   value={city}
                   onChange={value => this.onChange('city', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
+                  error={error.city}
                 />
               </div>
               <div className="form-section">
@@ -209,7 +294,7 @@ class RegisterScreen extends Component {
                     name={cardName}
                     expiry={`${cardMonth}/${cardYear}`}
                     cvc={cardCVV}
-                    focused
+                    callback={(type, isValid) => this.setState({ cardValid: isValid })}
                   />
                 </div>
                 <RegisterInput
@@ -219,6 +304,7 @@ class RegisterScreen extends Component {
                   placeholder="____ ____ ____ ____"
                   value={maskCardNumber(cardNumber)}
                   onChange={value => this.onChange('cardNumber', value)}
+                  error={error.cardNumber}
                 />
                 <RegisterInput
                   label="Nome completo"
@@ -226,6 +312,7 @@ class RegisterScreen extends Component {
                   width="55%"
                   value={cardName}
                   onChange={value => this.onChange('cardName', value)}
+                  error={error.cardName}
                 />
                 <RegisterSelect
                   label="Validade"
@@ -236,6 +323,7 @@ class RegisterScreen extends Component {
                   value={cardMonth}
                   onChange={value => this.onChange('cardMonth', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
+                  error={error.cardMonth}
                 />
                 <RegisterSelect
                   name="card-year"
@@ -245,6 +333,7 @@ class RegisterScreen extends Component {
                   value={cardYear}
                   onChange={value => this.onChange('cardYear', value)}
                   onChangeDropdownVisible={value => this.onChange('dropdownVisible', value)}
+                  error={error.cardYear}
                 />
                 <RegisterInput
                   label="Código de segurança"
@@ -252,6 +341,7 @@ class RegisterScreen extends Component {
                   width="50%"
                   value={cardCVV}
                   onChange={value => this.onChange('cardCVV', value)}
+                  error={error.cardCVV}
                 />
               </div>
               <div className="form-section">
@@ -275,7 +365,7 @@ class RegisterScreen extends Component {
             </form>
             <div className="register-screen__buttons">
               <button className="btn btn-outline back">Voltar</button>
-              <button className="btn btn-primary">Finalizar compra</button>
+              <button className="btn btn-primary" onClick={() => this.validateForm()}>Finalizar compra</button>
             </div>
           </section>
           <section className="register-screen__purchase-details">

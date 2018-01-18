@@ -42,6 +42,7 @@ const Input = styled.input`
   width: 100%;
   padding: 1.7rem;
   border: 2px solid #CCC;
+  border-color: ${props => inputStatus(props.error)};
   border-radius: 50px;
 
   &::-webkit-input-placeholder {
@@ -81,6 +82,18 @@ const Input = styled.input`
   }
 `;
 
+const inputStatus = (status) => {
+  switch (status) {
+    case false:
+      return '#64a80b';
+    case true:
+      return '#b7102c';
+    case '':
+    default:
+      return '#CCC';
+  }
+};
+
 const SelectBox = styled.div`
   font-size: 2rem;
   text-indent: 1rem;
@@ -89,6 +102,7 @@ const SelectBox = styled.div`
   width: 100%;
   padding: 1.7rem;
   border: 2px solid #CCC;
+  border-color: ${props => inputStatus(props.error)};
   border-radius: 50px;
   position: relative;
   cursor: pointer;
@@ -148,6 +162,7 @@ export const RegisterInput = ({
   placeholder,
   value,
   onChange,
+  error,
   children
 }) => (
     <Box widthSize={width}>
@@ -158,6 +173,7 @@ export const RegisterInput = ({
         placeholder={placeholder}
         value={value}
         onChange={e => onChange(e.target.value)}
+        error={error}
       />
       {children}
     </Box>
@@ -171,31 +187,30 @@ export const RegisterSelect = ({
   options,
   value,
   onChange,
-  onChangeDropdownVisible
+  onChangeDropdownVisible,
+  error
 }) => (
     <Box widthSize={width}>
       {label && (<Label htmlFor={`input-${name}`}>{label}</Label>)}
-      <SelectBox onClick={() => onChangeDropdownVisible(name)}>
+      <SelectBox onClick={() => onChangeDropdownVisible(name)} error={error}>
         <span>{value}</span>
         <SelectOverlay
           dropdownVisible={dropdownVisible}
           name={name}
           onClick={() => onChangeDropdownVisible('')}
         />
-        {/* <ul className={dropdownVisible === name && 'show'}> */}
         <SelectList
           dropdownVisible={dropdownVisible}
           name={name}
         >
           {options.map(item => (
-            <SelectOption onClick={() => {
-              onChange(item);
-              onChangeDropdownVisible('');
-            }}>{item}</SelectOption>
-            // <li onClick={() => {
-            //   onChange(item);
-            //   onChangeDropdownVisible('');
-            // }}>{item}</li>
+            <SelectOption
+              key={item}
+              onClick={() => {
+                onChange(item);
+                onChangeDropdownVisible('');
+              }}
+            >{item}</SelectOption>
           ))}
         </SelectList>
       </SelectBox>
